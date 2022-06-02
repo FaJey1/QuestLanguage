@@ -1,13 +1,11 @@
 #include "Lexer.h"
 #include "Parser.h"
 #include "StackMachine.h"
-
-//#include "Patterns.h"
+#include "Interpreter.h"
 
 int main()
 {
     Lexer lexer("testfinal.txt");
-    //Parser parser(lexer.get_token_list());
 
     lexer.show_token_list();
     vector<UnitClass> token_list = lexer.get_token_list();
@@ -22,23 +20,19 @@ int main()
     stackMachine.to_postfix();
     auto code = stackMachine.get_code();
 
+    cout << "\nRPN\n\n";
     for (const auto& line : *code) {
         for (const auto& token : line) {
-            std::cout << token.value << " ";
+            cout << token.value << " ";
         }
-        std::cout << "\n";
+        cout << "\n";
     }
 
-    delete code;
-    code = nullptr;
-    //parser.lexical_correctness_check();
+    cout << "\nEXECUTION\n\n";
 
-    /*Patterns patterns;
-    std::string str = "\"Pavel Stas\"";
-    std::cout << str << endl;
-    std::cout << patterns.get_type(str) << endl;*/
-    
-    //Parser parser;
+    Interpreter interpreter(code);
+    interpreter.exec_code();
+    interpreter.show_variables();
 
     /*ArrayByFaJey<string> array;
 
@@ -63,9 +57,6 @@ int main()
     for (int i = 0; i < array.get_size(); i++) {
         cout << array[i] << endl;
     }*/
-
-    /*Patterns pat;
-    cout << pat.get_type("=");*/
 
     return 0;
 }

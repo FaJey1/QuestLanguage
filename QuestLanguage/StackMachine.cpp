@@ -152,7 +152,7 @@ void StackMachine::assignment_to_postfix() {
 
 void StackMachine::function_call_to_postfix() {
 	// function_name
-	auto function = *token_list_it;
+	current_line->push_back(*token_list_it);
 	token_list_it++;
 	token_list_it++;
 	
@@ -218,7 +218,7 @@ void StackMachine::expression_to_postfix() {
 
 void StackMachine::if_op_to_postfix() {
 	vector<int> jumps;
-	vector<int>::reverse_iterator jumpIt;
+	vector<int>::iterator jumpIt;
 	const int start = current_line->empty() ? 0 : current_line->size();
 
 	// IF ... THEN
@@ -242,7 +242,7 @@ void StackMachine::if_op_to_postfix() {
 
 	jumps.push_back(current_line->size());
 
-	jumpIt = jumps.rbegin();
+	jumpIt = jumps.begin();
 	for (int i = start; i < current_line->size(); i++) {
 		if ((*current_line)[i].value == "p!F") {
 			string pos = std::to_string(*jumpIt);
@@ -342,6 +342,12 @@ void StackMachine::for_op_to_postfix() {
 	token_list_it++;
 
 	this->body_to_postfix();
+	current_line->push_back(UnitClass("digit", "1"));
+	current_line->push_back(var);
+	current_line->push_back(UnitClass("mathOperation", "+"));
+	current_line->push_back(var);
+	current_line->push_back(assignment);
+
 	current_line->push_back(UnitClass("p", "p!"));
 	jumps.push_back(current_line->size());
 
