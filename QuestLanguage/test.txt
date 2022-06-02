@@ -1,0 +1,10 @@
+INTEGER Pavel_age = 5,Pavel_force , Ivan_force .
+Ivan_force= ((-6) + 7+Pavel_age).
+FOR Pavel_force RANGE[5, Pavel_iq] DO
+	Entity_name+= Pavel_force.
+	WHILE Pavel_force +5 < Ivan_force && Pavel_age < 8 DO
+		Ivan_force--.
+		Pavel_age+5.
+	END.
+	Stas_iq = 200.
+END.

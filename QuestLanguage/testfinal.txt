@@ -1,0 +1,15 @@
+INTEGER Pavel_age = 5, Pavel_force = 10, Ivan_force = 16.
+Ivan_age=(((Pavel_force - 6 + Pavel_age) * 3) / 5).
+STRING Entity_name = "Stas".
+FOR Pavel_force RANGE[0,10] DO
+	Entity_name = Pavel_force.
+END.
+WHILE Pavel_force < Ivan_force && Pavel_age < 8 DO
+	Ivan_force.
+	Pavel_age + 5.
+END.
+IF Pavel_force > Ivan_force THEN
+	OUTPUT("Pavel stronger").
+ELSE
+	OUTPUT("Ivan stronger").
+END.
